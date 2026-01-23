@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Odd and Even Row Styling</title>
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        table {
+            width: 70%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-family: Arial;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+        th {
+            background: #f0f0f0;
+        }
+        .odd-row {
+            background-color: #e8f5e9; /* Light Green */
+        }
+        .even-row {
+            background-color: #da6d91; /* Light Pink */
+        }
+    </style>
+</head>
+
+<body ng-controller="tableCtrl">
+
+    <h2 style="text-align:center;">student Data (Odd/Even Row Styling)</h2>
+
+    <table>
+        <tr>
+            <th>RollNo</th>
+            <th>Name</th>
+            <th>Class</th>
+        </tr>
+
+        <tr ng-repeat="emp in employees"
+            ng-class-odd="'odd-row'"
+            ng-class-even="'even-row'">
+            <td>{{emp.id}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.dept}}</td>
+        </tr>
+    </table>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("tableCtrl", function($scope) {
+            $scope.employees = [
+               {id: 1, name: "Vaishnavi", dept: "Co"},
+                {id: 2, name: "Sakshi", dept: "IT"},
+                {id: 3, name: "Pranjal", dept: "It"},
+                {id: 4, name: "riya", dept: "co"},
+                {id: 5, name: "Pranita", dept: "co"},
+                {id: 6, name: "Priya", dept: "IT"},
+                {id: 7, name: "Parag", dept: "Ce"},
+                {id: 8, name: "Dheyash", dept: "Ce"},
+                {id: 9, name: "anuja", dept: "Co"},
+                {id: 10, name: "Shruti", dept: "Ei"}
+            ];
+        });
+    </script>
+
+</body>
+</html>

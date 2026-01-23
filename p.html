@@ -1,0 +1,117 @@
+const express = require("express");
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+
+let surveyData = [];
+
+/* ---------- UI + CLIENT SIDE CODE ---------- */
+app.get("/", (req, res) => {
+    res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Survey System</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+        }
+        .box {
+            background: white;
+            width: 350px;
+            padding: 20px;
+            margin: 80px auto;
+            border-radius: 10px;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+        }
+        button {
+            background: #4facfe;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box">
+    <h2>Online Survey</h2>
+
+    <form id="surveyForm">
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+
+        <select id="rating" required>
+            <option value="">Satisfaction Level</option>
+            <option>Very Satisfied</option>
+            <option>Satisfied</option>
+            <option>Neutral</option>
+            <option>Dissatisfied</option>
+        </select>
+
+        <textarea id="comment" placeholder="Comments"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <button onclick="loadResults()">View Results</button>
+    <pre id="output"></pre>
+</div>
+
+<script>
+document.getElementById("surveyForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+        name: name.value,
+        email: email.value,
+        rating: rating.value,
+        comment: comment.value
+    };
+
+    await fetch("/submit", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    alert("Survey Submitted Successfully ✔");
+    surveyForm.reset();
+});
+
+async function loadResults() {
+    const res = await fetch("/results");
+    const data = await res.json();
+    output.textContent = JSON.stringify(data, null, 2);
+}
+</script>
+</body>
+</html>
+`);
+});
+
+/* ---------- SERVER SIDE ---------- */
+app.post("/submit", (req, res) => {
+    surveyData.push(req.body);
+    res.json({ status: "success" });
+});
+
+app.get("/results", (req, res) => {
+    res.json(surveyData);
+});
+
+app.listen(PORT, () => {
+    console.log("Server running at http://localhost:" + PORT);
+});

@@ -7,35 +7,27 @@
 <body ng-controller="myCtrl">
 <h2>Student Registration Form</h2>
 <form name="myForm" novalidate>
-<label>Name:</label>
-<input type="text" name="name" ng-model="student.name" required>
-<span ng-show="myForm.name.$touched && myForm.name.$invalid" style="color:rgb(219, 23, 23);">
+    <label>Emp_Id:</label>
+<input type="number" name="Emp_Id" ng-model="student.Emp_Id" required>
+<span ng-show="myForm.name.$touched && myForm.name.$invalid" style="color:red;">
 Name is required
 </span>
 <br><br>
-<label>class:</label>
-<input type="text" name="class" ng-model="student.class" required>
-<span ng-show="myForm.name.$touched && myForm.name.$invalid" style="color:rgb(219, 23, 23);">
-Name is required
-</span>
-<br><br>
-<label>Department:</label>
-<input type="text" name="department" ng-model="student.department" required>
-<span ng-show="myForm.name.$touched && myForm.name.$invalid" style="color:rgb(219, 23, 23);">
+<label>Emp_Name:</label>
+<input type="text" name="Emp_Name" ng-model="student.Emp_Name" required>
+<span ng-show="myForm.name.$touched && myForm.name.$invalid" style="color:red;">
 Name is required
 </span>
 <br><br>
 <label>Email:</label>
-<input type="email" name="email" ng-model="student.email"  required>
+<input type="email" name="email" ng-model="student.email" required>
 <span ng-show="myForm.email.$touched && myForm.email.$invalid" style="color:red;">
 Enter a valid Email
 </span>
 <br><br>
-<label>mobileno:</label>
-<input type="mobileno" name="mobileno" ng-model="student.mobileno"max="10" required>
-<span ng-show="myForm.email.$touched && myForm.mobile_no
-
-.$invalid" style="color:red;">
+<label>mobile_no:</label>
+<input type="number" name="mobile_no" ng-model="student.mobile_no" required>
+<span ng-show="myForm.email.$touched && myForm.email.$invalid "style="font: optional; style="color:red;">
 Enter a valid number
 </span>
 <br><br>
